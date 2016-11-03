@@ -2,6 +2,7 @@
 import sys
 import argparse
 from ciphers.CipherCesar import CipherCesar
+from ciphers.CipherRailFence import CipherRailFence
 
 #parametros por defecto: cifrado.
     #http://stackoverflow.com/questions/9505898/conditional-command-line-arguments-in-python-using-argparse
@@ -25,7 +26,7 @@ parser_encode = subparsers.add_parser('cipher', help='To encode the text')
 parser_decode = subparsers.add_parser('decipher', help='To decode the text')
 
 requiredNamed = parser.add_argument_group('Functional named arguments')
-requiredNamed.add_argument("-t" ,'--type', help="Code type (ex: Cesar cipher)", type=str, default='cesar', choices=['cesar'])
+requiredNamed.add_argument("-t" ,'--type', help="Code type (ex: Cesar cipher)", type=str, default='cesar', choices=['cesar','railfence'])
 requiredNamed.add_argument('-i' ,'--input', help='Input text. If the text contain spaces, it must appear between commas (\'text to encode\')')
 requiredNamed.add_argument("-k" ,'--key', help="Code key")
 
@@ -40,6 +41,8 @@ print(args);
 typeCipher = args['type']
 if(typeCipher == 'cesar'):
     cipher = CipherCesar()
+elif(typeCipher == 'railfence'):
+    cipher = CipherRailFence()
     
 if(args['command'] == 'decipher'):
     command = 'decipher'
@@ -52,11 +55,16 @@ if(key is None): key = str(input("Please enter the code: "))
 cipher.setKey(key.strip())
 if(text is None): text = str(input("Please enter the text to "+command+": "))
 
-print(command+' the text '+text+' under the key '+key)
+#print(command+' the text '+text+' under the key '+key)
 if(command == 'decipher'):
     code = cipher.decipher(text)
 else:
     code = cipher.cipher(text)
+    
+print(code)
 
+print(cipher.decipher(code))
+#Si hay output, lo escribe ahí con appen.
+#Si no, lo imprime por pantalla
 
 
