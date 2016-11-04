@@ -4,13 +4,8 @@ import argparse
 from ciphers.CipherCesar import CipherCesar
 from ciphers.CipherRailFence import CipherRailFence
 
-#parametros por defecto: cifrado.
-    #http://stackoverflow.com/questions/9505898/conditional-command-line-arguments-in-python-using-argparse
-    #https://docs.python.org/3/howto/argparse.html
-    #http://www.cyberciti.biz/faq/python-command-line-arguments-argv-example/
-
 #-v|--verbose verboso
-#-k -> clave
+#-k FILE -> clave
 #-kF -> clave en archivo
 #-output filename/path -> Mete output en archivo
 #type=cesar|cesar con clave|
@@ -33,6 +28,8 @@ requiredNamed.add_argument("-k" ,'--key', help="Code key")
 optionalNamed = parser.add_argument_group('Optional named arguments')
 #optionalNamed.add_argument('-if','--inputFile', help='Input file name')
 optionalNamed.add_argument('-o','--outputFile',help='Output file name. If no present, the output will come in the return')
+optionalNamed.add_argument('-kF','--keyFile',help='Code key through file.') #TODO
+optionalNamed.add_argument('-iF','--inputFile',help='input text through file.') #TODO
 
 
 args = vars(parser.parse_args())
