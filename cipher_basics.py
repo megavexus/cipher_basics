@@ -58,7 +58,11 @@ if(command == 'decipher'):
 else:
     code = cipher.cipher(text)
     
-print(code)
+if(args['outputFile'] is not None):
+    #todo: Comprueba si existe el fichero. Si no, lo crea. Si existe, lo añade al final.
+    print(args['outputFile'])
+else:
+    print(code)
 
 print(cipher.decipher(code))
 #Si hay output, lo escribe ahí con appen.
