@@ -2,8 +2,14 @@
 
 class AbstractCipher:
     'Abstract cipher class'
+    key = None
+    verbose = False
+    
     def ___init__(self,skey,isFile=False):
         self.setKey(skey,isFile)
+    
+    def setVerbose(self):
+        self.verbose = True;
     
     def setKey(self,skey,isFile = False):
         print(skey);
