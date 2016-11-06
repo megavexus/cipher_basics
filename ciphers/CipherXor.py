@@ -23,7 +23,7 @@ class CipherXor (AbstractCipher):
         try:
             self.key = int(skey.strip())
         except ValueError:
-            raise ValueError('Error: The key must be an integer')
+            raise KeyError('The key must be an integer')
         
 
     """

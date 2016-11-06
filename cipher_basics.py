@@ -76,5 +76,5 @@ try:
     else:
         print(code)
         
-except ValueError as err:
-    print ("Error: {}".format(err))
+except KeyError as err:
+    print ("Key Error: {}".format(err))
