@@ -60,6 +60,7 @@ class CipherXor (AbstractCipher):
         ciphertext = self.cript(data)
         # Se realiza la armadura ascii si es necesario
         if(self.armor): 
+            print('AQUI ES CUANDO PETO: {}'.format(ciphertext))
             ciphertext = base64.b64encode(ciphertext.encode('ascii'))
             if(self.verbose): print(' - CIPHERTEXT /W ARMOR [S:{}]: [{}]'.format(len(ciphertext),ciphertext))
         return ciphertext
@@ -73,7 +74,12 @@ class CipherXor (AbstractCipher):
         
 def numtobits(n):
     nbin = bin(int(n))[2:]
-    nbin = [int(a) for a in '00000000'[len(nbin):] + nbin]
+    
+    base = '00000000'
+    for n in range(int(len(nbin)/8)): base += '00000000'
+    
+    nbin = [int(a) for a in base[len(nbin):] + nbin]
+    print(nbin)
     return nbin
 
 def tobits(s):
