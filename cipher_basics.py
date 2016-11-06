@@ -33,45 +33,48 @@ optionalNamed.add_argument('-o','--outputFile',help='Output file name. If no pre
 optionalNamed.add_argument('-kF','--keyFile',help='Code key through file.') #TODO
 optionalNamed.add_argument('-iF','--inputFile',help='input text through file.') #TODO
 
+try:
 
-args = vars(parser.parse_args())
-if(args['verbose']): print(args);
+    args = vars(parser.parse_args())
+    if(args['verbose']): print(args);
+        
+    typeCipher = args['type']
+    if(typeCipher == 'cesar'):
+        cipher = CipherCesar()
+    elif(typeCipher == 'railfence'):
+        cipher = CipherRailFence()
+    elif(typeCipher == 'xor'):
+        cipher = CipherXor()
     
-typeCipher = args['type']
-if(typeCipher == 'cesar'):
-    cipher = CipherCesar()
-elif(typeCipher == 'railfence'):
-    cipher = CipherRailFence()
-elif(typeCipher == 'xor'):
-    cipher = CipherXor()
-
-cipher.processParameters(args)
-
-if(args['verbose']):
-    cipher.setVerbose()
+    cipher.processParameters(args)
     
-if(args['command'] == 'decipher'):
-    command = 'decipher'
-else:
-    command = 'cipher'
-
-key = args['key']
-text = args['input']
-if(key is None): key = str(input("Please enter the code: "))
-cipher.setKey(key.strip())
-if(text is None): text = str(input("Please enter the text to "+command+": "))
-
-
-if(command == 'decipher'):
-    code = cipher.decipher(text)
-    if(cipher.cipher(code) != text): print('ERROR: NO COINCIDEN')
-else:
-    code = cipher.cipher(text)
-    if(cipher.decipher(code) != text): print('ERROR: NO COINCIDEN')
-
-
-if(args['outputFile'] is not None):
-    print(args['outputFile'])
-else:
-    print(code)
-
+    if(args['verbose']):
+        cipher.setVerbose()
+        
+    if(args['command'] == 'decipher'):
+        command = 'decipher'
+    else:
+        command = 'cipher'
+    
+    key = args['key']
+    text = args['input']
+    if(key is None): key = str(input("Please enter the code: "))
+    cipher.setKey(key.strip())
+    if(text is None): text = str(input("Please enter the text to "+command+": "))
+    
+    
+    if(command == 'decipher'):
+        code = cipher.decipher(text)
+        if(cipher.cipher(code) != text): print('ERROR: NO COINCIDEN')
+    else:
+        code = cipher.cipher(text)
+        if(cipher.decipher(code) != text): print('ERROR: NO COINCIDEN')
+    
+    
+    if(args['outputFile'] is not None):
+        print(args['outputFile'])
+    else:
+        print(code)
+        
+except ValueError as err:
+    print ("Error: {}".format(err))

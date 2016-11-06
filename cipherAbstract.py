@@ -12,7 +12,6 @@ class AbstractCipher:
         self.verbose = True;
     
     def setKey(self,skey,isFile = False):
-        print(skey);
         if(isFile):
             # Intenta obtener el archivo. Si no, error.
             self._innerSetKey(file_get_contents(skey))

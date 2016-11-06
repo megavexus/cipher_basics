@@ -19,7 +19,12 @@ class CipherXor (AbstractCipher):
         if(params['armor'] == True): self.armor = True
     
     def _innerSetKey(self,skey):
-       self.key = str(skey.strip())
+        #If is not an integer, throw exception
+        try:
+            self.key = int(skey.strip())
+        except ValueError:
+            raise ValueError('Error: The key must be an integer')
+        
 
     """
     Compara mediante XOR el primer array frente al segundo.
