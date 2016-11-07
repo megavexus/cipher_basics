@@ -4,6 +4,7 @@ import argparse
 from ciphers.CipherCesar import CipherCesar
 from ciphers.CipherRailFence import CipherRailFence
 from ciphers.CipherXor import CipherXor
+from ciphers.CipherAfin import CipherAfin
 
 #-v|--verbose verboso
 #-k FILE -> clave
@@ -22,7 +23,7 @@ parser_encode = subparsers.add_parser('cipher', help='To encode the text')
 parser_decode = subparsers.add_parser('decipher', help='To decode the text')
 
 requiredNamed = parser.add_argument_group('Functional named arguments')
-requiredNamed.add_argument("-t" ,'--type', help="Code type (ex: Cesar cipher)", type=str, default='cesar', choices=['cesar','railfence','xor'])
+requiredNamed.add_argument("-t" ,'--type', help="Code type (ex: Cesar cipher)", type=str, default='cesar', choices=['cesar','railfence','xor','afin'])
 requiredNamed.add_argument('-i' ,'--input', help='Input text. If the text contain spaces, it must appear between commas (\'text to encode\')')
 requiredNamed.add_argument("-k" ,'--key', help="Code key")
 requiredNamed.add_argument("-a" ,'--armor', help="Encode in code64",  action="store_true")
@@ -44,7 +45,9 @@ try:
     elif(typeCipher == 'railfence'):
         cipher = CipherRailFence()
     elif(typeCipher == 'xor'):
-        cipher = CipherXor()
+        cipher = CipherXor()    
+    elif(typeCipher == 'afin'):
+        cipher = CipherAfin()
     
     cipher.processParameters(args)
     
@@ -68,7 +71,7 @@ try:
         if(cipher.cipher(code) != text): print('ERROR: NO COINCIDEN')
     else:
         code = cipher.cipher(text)
-        if(cipher.decipher(code) != text): print('ERROR: NO COINCIDEN')
+        #if(cipher.decipher(code) != text): print('ERROR: NO COINCIDEN')
     
     
     if(args['outputFile'] is not None):
