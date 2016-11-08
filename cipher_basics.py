@@ -68,10 +68,10 @@ try:
     
     if(command == 'decipher'):
         code = cipher.decipher(text)
-        if(cipher.cipher(code) != text): print('ERROR: NO COINCIDEN')
+        if(cipher.cipher(code) != text): print('ERROR: NO COINCIDEN: {} -> {} != {}'.format(text,code,cipher.cipher(code)))
     else:
         code = cipher.cipher(text)
-        #if(cipher.decipher(code) != text): print('ERROR: NO COINCIDEN')
+        if(cipher.decipher(code) != text): print('ERROR: NO COINCIDEN: {} -> {} != {}'.format(text,code,cipher.decipher(code)))
     
     
     if(args['outputFile'] is not None):

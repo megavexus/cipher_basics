@@ -63,21 +63,20 @@ class CipherAfin (AbstractCipher):
         for letter in data:
             if(letter.isalpha()):
                 if(self.verbose): print("X={} -> C= {} + {}*{}".format(letter,self.key,self.bkey,self.letterOrd(letter)))
-                #c = (a + b*x) % N
-                numLetter = self.key + self.bkey*self.letterOrd(letter)
-                if(numLetter > self.N): numLetter %= self.N
+                #c = (b + a*x) % N
+                numLetter = (self.bkey + self.key*self.letterOrd(letter)) % self.N
                 letter = chr(self.getLetterOrd(letter,numLetter))
             ciphercode += letter
         return ciphercode
      
     def decipher(self,data):
         ciphercode = ''
+        ai = cim(self.key,self.N)
         for letter in data:
             if(letter.isalpha()):
-                if(self.verbose): print("X={} -> C= {} * ({} + {} - {})".format(letter,cim(self.key,self.N),self.letterOrd(letter),self.bkey,self.N))
+                if(self.verbose): print("X={} -> C= {} * ({} + {} - {})".format(letter,ai,self.letterOrd(letter),self.bkey,self.N))
                 #x = (1/a * (c + N - b)) % N
-                numLetter = int(cim(self.key,self.N) * (self.letterOrd(letter) + self.N - self.bkey))
-                if(numLetter > self.N): numLetter %= self.N
+                numLetter = int(ai * (self.letterOrd(letter) + self.N - self.bkey)) % self.N
                 letter = chr(self.getLetterOrd(letter,numLetter))
             ciphercode += letter
         return ciphercode
