@@ -16,14 +16,11 @@ class CipherPlayfair (AbstractCipher):
         #extract I of the table
         letters = [chr(i + ord('A')) for i in range(26) ]
         letters.remove('I')
-        print(letters)
         #Normalice the key
-        print(skey)
         skey = self.preprocessText(skey)
         regex = re.compile('[^a-zA-Z]')
         skey = regex.sub('', skey)
         
-        print(skey)
         #create the key table
         self.key = []
         for l in skey:
@@ -31,8 +28,7 @@ class CipherPlayfair (AbstractCipher):
                 letters.remove(l)
                 self.key.append(l)
         self.key += letters
-        print(self.key)
-        raise Exception('Not Implemented Yet')
+        return self.key
         
     def cipher(self,data):
         raise Exception('Not Implemented Yet')
