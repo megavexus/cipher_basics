@@ -21,25 +21,6 @@ def cim(a,m):
         if x == 1:
             return b
     return 0
-"""
-int cim(int a, int m)
-{
-    int b, //Almacena el valor de b en (a * b)(mod m)
-        x; //Almacena el resultado de la op.
-
-    for(b = 0; b < m; b++)
-    {
-        x = (a * b) % m;
-        if(x == 1)
-            return b;
-    }
-    return 0;
-}
-"""
-
-
-#AYSY TTYG AHEK YATY ZGEZ YA
-#a=4 y b=7
 
 class CipherAfin (AbstractCipher):
     # 26
