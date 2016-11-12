@@ -1,6 +1,7 @@
 #!/usr/bin/python
 from cipherAbstract import AbstractCipher
 import re, locale
+import math
 
 
 class CipherPlayfair (AbstractCipher):
@@ -31,9 +32,34 @@ class CipherPlayfair (AbstractCipher):
         return self.key
         
     def cipher(self,data):
+        data = self.preprocessText(data)
+        for i in range(len(data)):
+        plainData = []
+        for letter in data:
+            if(letter.isalpha()): plainData.append(letter)       
+
+        if(len(plainData)%2 == 1): planData[len(plainData)+1] = 'Q'        
+        cipherText = '';
+        for i in range(int(len(plainData)/2)):
+            #TODO: ord no. Coger funcion que reste ord('A')
+            modA = ord(planData[i])%5
+            modB = ord(planData[i+1])%5
+            divA = int(planData[i]/5)
+            divB = int(planData[i+1]/5)
+            
+            if(modA != modB and divA != divB):
+                # SI no coinciden DIVS ni MODS: Coge el DIV1*5+MOD2, DIV2*5+MOD1
+            elif(modA != modB and divA == divB):
+                # Si coinciden DIVS y ! MODS: Coge el de la izda
+            elif(modA == modB and divA != divB):
+                # Si coinciden MODS y !DIVS : Coge el de arriba
+            elif:
+                # Si son iguales: Coge el de la izda.
+            
         raise Exception('Not Implemented Yet')
 
     def decipher(self,data):
+        # Igual que cipher, pero al reves.
         raise Exception('Not Implemented Yet')
         
     #transform to uppercase and substitute the I for J

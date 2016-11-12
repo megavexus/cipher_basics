@@ -50,7 +50,7 @@ try:
         cipher = CipherXor()    
     elif(typeCipher == 'afin'):
         cipher = CipherAfin()    
-    elif(typeCipher == 'playfair'):
+    elif(typeCipher == 'f'):
         cipher = CipherPlayfair()
     
     cipher.processParameters(args)
