@@ -36,16 +36,21 @@ class CipherPlayfair (AbstractCipher):
         for i in range(len(data)):
         plainData = []
         for letter in data:
-            if(letter.isalpha()): plainData.append(letter)       
+            if(letter.isalpha()): plainData.append(letter)
 
         if(len(plainData)%2 == 1): planData[len(plainData)+1] = 'Q'        
         cipherText = '';
         for i in range(int(len(plainData)/2)):
             #TODO: ord no. Coger funcion que reste ord('A')
-            modA = ord(planData[i])%5
-            modB = ord(planData[i+1])%5
-            divA = int(planData[i]/5)
-            divB = int(planData[i+1]/5)
+            letterA = planData[i]
+            letterB = planData[i+1]
+            ordA = self.ordLetter(letterA)
+            ordB = self.ordLetter(letterB)
+            # NO -> Coger la posición en la tabla, no el ord.
+            modA = ordA%5
+            modB = ordB%5
+            divA = int(ordA/5)
+            divB = int(ordB/5)
             
             if(modA != modB and divA != divB):
                 # SI no coinciden DIVS ni MODS: Coge el DIV1*5+MOD2, DIV2*5+MOD1
@@ -66,4 +71,11 @@ class CipherPlayfair (AbstractCipher):
     def preprocessText(self,data):
         data = data.upper()
         return data.replace('I','J')
+        
+    """
+    Returns the letter position in the table
+    """
+    def ordLetter(self,letter):
+        return self.table.index(letter)
+        
         
